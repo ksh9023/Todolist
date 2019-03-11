@@ -4,18 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.Id;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
-/**
- * Todo 테이블
- * @author 강성효
- **/
+import java.util.List;
+
 @Getter
 @Setter
-@Embeddable
+@Entity
 @Table(name = "todolist")
-public class Todo {
+public class TodoList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

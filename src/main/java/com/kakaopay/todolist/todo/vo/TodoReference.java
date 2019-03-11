@@ -2,10 +2,10 @@ package com.kakaopay.todolist.todo.vo;
 
 import lombok.Getter;
 import lombok.Setter;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+import javax.persistence.*;
+import java.util.List;
+
 /**
  * 할일 참조를 위한 테이블
  * @author 강성효
@@ -15,9 +15,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "todolist_reference")
 public class TodoReference {
-
     @Id
-    @GeneratedValue
     public int id;
 
+    @ManyToOne
+    @JoinColumn(name = "todolist_id",referencedColumnName = "id")
+    public TodoList todoLists;
 }
