@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.*;
 
 
 /**
-* 할일 CRUD 컨트롤러
-* @author 강성효
-**/
+ * 할일 CRUD 컨트롤러
+ * @author 강성효
+ **/
 @Log
 @RestController
+@RequestMapping("/api")
 public class TodoController {
 
     @Autowired
@@ -25,20 +26,25 @@ public class TodoController {
     @GetMapping("/todo/{id}")
     public ResponseEntity<TodoList> getTodo(@ModelAttribute TodoList todoList) throws Exception {
         log.info("입력 : "+todoList.getId());
-         ResponseEntity<TodoList> responseEntity = new ResponseEntity<>(todoService.getTodo(todoList), HttpStatus.OK);
+         ResponseEntity<TodoList> responseEntity = todoService.getTodo(todoList);
          return responseEntity;
     }
     @PostMapping("/todo")
-    public void regTodo(){
-
+    public ResponseEntity registerTodo(@ModelAttribute TodoList todoList){
+        ResponseEntity<TodoList> responseEntity = todoService.updateORregisterTodo(todoList);
+        return responseEntity;
     }
+
     @PutMapping("/todo/{id}")
-    public void modTodo(){
-
+    public ResponseEntity modifyTodo(@ModelAttribute TodoList todoList){
+        ResponseEntity responseEntity = todoService.updateORregisterTodo(todoList);
+        return responseEntity;
     }
-    @DeleteMapping("/todo/{id}")
-    public void delTodo(){
 
+    @DeleteMapping("/todo/{id}")
+    public ResponseEntity delTodo(@ModelAttribute TodoList todoList){
+        ResponseEntity responseEntity = todoService.deleteTodo(todoList);
+        return responseEntity;
     }
 
 }

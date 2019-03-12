@@ -25,6 +25,10 @@ public class TodoListAddTest {
 
         Optional<TodoList> search = todoRepo.findById(1);
         assertThat(search.get().getContent()).isEqualTo("clean my room");
+
+        todoList.setContent("정수기 청소");
+        todoRepo.save(todoList);
+        search = todoRepo.findById(2);
     }
 
 }
